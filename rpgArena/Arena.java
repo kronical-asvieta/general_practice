@@ -8,10 +8,10 @@ public class Arena {
         this.party = p;
     }
 
-    public static void printStatus(List<Character> party) {
-        if (party == null) return;
+    public void printStatus() {
+        if (this.party == null) return;
 
-        for (Character c : party) {
+        for (Character c : this.party) {
             System.out.println(c);
 
             if (c instanceof Warrior) {
@@ -19,7 +19,7 @@ public class Arena {
             } else if(c instanceof Mage) {
                 Mage m = (Mage) c;
                 if (m.getMana() < 10) {
-                    System.out.println(String.format("   -> WARNING: %s is exhausted! (Mana: %d)", m.getName(), m.getMana()));
+                    System.out.println(String.format("-> WARNING: %s is exhausted! (Mana: %d)", m.getName(), m.getMana()));
                 }
             }
         }
@@ -28,7 +28,7 @@ public class Arena {
     public Character getChampion(List<Character> party) {
         if (party == null) return null;
 
-        Character current = null;
+        Character current = party.get(0);
 
         for (Character c : party) {
             int health = (c instanceof Warrior) ? c.getHealth() * 2 : c.getHealth();

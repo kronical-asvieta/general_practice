@@ -7,11 +7,19 @@ public class Main {
         List<Character> party = new ArrayList<>();
         if (n < 1) return party;
 
-        String[] names = {"Herbert", "Hercules", "Tony", "Mike", "Dennis", "Minos Prime"};
+        String[] names = {"Herbert", "Hercules", "Tony", "Mike", "Dennis", "Minos Prime", "Lina", "Jennifer", "Ava", "Mars", "Lilly"};
+        int maxArmor = 20;
+        int maxMana = 50;
 
         for (int i = 0; i < n; i++) {
-            int r = (int) (Math.random() * 6);
-            party.add(new Character(names[r], 100));
+            int rN = (int) (Math.random() * names.length);
+            double rC = Math.random();
+            int rA = (int) (Math.random() * maxArmor);
+            int rM = (int) (Math.random() * maxMana);
+
+            if (rC > 0.7) party.add(new Character(names[rN], 100));
+            if (rC > 0.3) party.add(new Warrior(names[rN], 100, rA));
+            if (rC <= 0.3) party.add(new Mage(names[rN], 80, rM));
         }
 
         return party;
@@ -19,7 +27,7 @@ public class Main {
     public static void main(String[] args) {
         List<Character> party = generateParty(20);
         Arena newArena = new Arena(party);
-        System.out.println(newArena);
+        newArena.printStatus();
         System.out.println(newArena.getChampion(party));
     }
 }
